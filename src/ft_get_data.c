@@ -76,17 +76,16 @@ t_room   *read_input(char **line, int num_of_lem)
         t_room          *room;
 
         int start_end = 0;
-        while ((*line[0] == '#') && (*line[1] == '#'))
+        while ((*line)[0] == '#' && (*line)[1] != '#')
         {
                 return NULL;
         }
-        if(ft_strcmp(*line, "##start") == 0)
+        if(ft_strcmp(*line, "##start") == 0 || ft_strcmp(*line, "##end")== 0)
         {
                 if ((*line)[2] == 's')
                         start_end = 1;
-                else
+                else 
                         start_end = 2;
-
         }
 
         if(has_char(line, ' ') == 2)
@@ -119,6 +118,8 @@ static void    ft_add_room(t_room **head, t_room *new)
 
 }
 
+
+
 t_room     *ft_get_data(char **input)
 {
 	int num_of_lem;
@@ -137,9 +138,10 @@ t_room     *ft_get_data(char **input)
              else if ((room = read_input(input, num_of_lem)))
              {
                      ft_add_room(&head, room);
-                     return (room);
              }
-              *input++;
+             else 
+                        return head;
+             *input++;
         }
-        return NULL;
+        return head;
 }

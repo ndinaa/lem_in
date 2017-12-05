@@ -3,6 +3,7 @@
 
 #include "../libft/libft.h"
 #include "lem_in.h"
+#include <unistd.h>
 
 char        *ft_print_map()
 {
@@ -18,7 +19,6 @@ char        *ft_print_map()
     }
     return (buff);
 }
-
 
 static void    print_list(t_room **room)
 {
@@ -39,24 +39,16 @@ static void    print_list(t_room **room)
         }
 }
 
-
 int     main()
 {
     
     char    *line;
     char    **ret;
     t_room  *new;
-    t_room  *next;
-    int     start = 0;
     char    **input;
 
     line = ft_print_map();
-    ret = ft_strsplit(line, '\n'); 
-    while (*ret)
-    {
-        new = ft_get_data(ret);
-        print_list(&new);
-        ft_putendl("\n");
-        *ret++;
-    }
+    ret = ft_strsplit(line, '\n');
+    new = ft_get_data(ret);
+    print_list(&new);
 }
