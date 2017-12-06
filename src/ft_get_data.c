@@ -75,7 +75,7 @@ t_room   *read_input(char **line, int num_of_lem)
         char            **input;
         t_room          *room;
 
-        int start_end = 0;
+        int start_end = 1;
         while ((*line)[0] == '#' && (*line)[1] != '#')
         {
                 return NULL;
@@ -86,6 +86,8 @@ t_room   *read_input(char **line, int num_of_lem)
                         start_end = 1;
                 else 
                         start_end = 2;
+		free(*line);
+		line++;	
         }
 
         if(has_char(line, ' ') == 2)
@@ -94,7 +96,7 @@ t_room   *read_input(char **line, int num_of_lem)
                 if(is_num(input[1]) && is_num(input[2]))
                 {
                         room = make_room(input, start_end, num_of_lem);
-                        return room;
+                        return (room);
                 }
         }
         return NULL;
@@ -108,7 +110,7 @@ static void    ft_add_room(t_room **head, t_room *new)
                 *head = new;
         else
         {
-                tmp = *head;
+                 tmp = *head;
                  while(tmp->next)
                         tmp = tmp->next;
                   tmp->next = new;
@@ -117,8 +119,6 @@ static void    ft_add_room(t_room **head, t_room *new)
         }
 
 }
-
-
 
 t_room     *ft_get_data(char **input)
 {
@@ -132,16 +132,12 @@ t_room     *ft_get_data(char **input)
 	{
                 
              if (has_char(input, ' ') == 0 && num_of_lem == 0)
-             {
                 num_of_lem = ft_atoi(*input);
-             }
              else if ((room = read_input(input, num_of_lem)))
-             {
                      ft_add_room(&head, room);
-             }
              else 
-                        return head;
+                        return (head);
              *input++;
         }
-        return head;
+        return (head);
 }
