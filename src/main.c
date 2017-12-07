@@ -20,14 +20,16 @@ char        *ft_print_map()
     return (buff);
 }
 
+#include <stdio.h>
+
 static void    print_list(t_room **room)
 {
         t_room  *tmp;
-
+	
         tmp = *room;
         while (tmp)
         {
-		ft_putstr("id = ");
+				ft_putstr("id = ");
                 ft_putendl(tmp->id);
                 ft_putstr("start = ");
                 ft_putendl(ft_itoa(tmp->is_start));
@@ -42,7 +44,6 @@ static void    print_list(t_room **room)
 
 int     main()
 {
-    
     char    *line;
     char    **ret;
     t_room  *new;

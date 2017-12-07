@@ -6,7 +6,7 @@
 /*   By: hlibago <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 08:48:20 by hlibago           #+#    #+#             */
-/*   Updated: 2017/12/04 09:20:20 by hlibago          ###   ########.fr       */
+/*   Updated: 2017/12/07 11:59:50 by hlibago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_room   *read_input(char **line, int num_of_lem)
         char            **input;
         t_room          *room;
 
-        int start_end = 1;
+        int start_end = 0;
         while ((*line)[0] == '#' && (*line)[1] != '#')
         {
                 return NULL;
@@ -89,7 +89,6 @@ t_room   *read_input(char **line, int num_of_lem)
 		free(*line);
 		line++;	
         }
-
         if(has_char(line, ' ') == 2)
         {
                 input = ft_strsplit(*line, ' ');
@@ -113,8 +112,13 @@ static void    ft_add_room(t_room **head, t_room *new)
                  tmp = *head;
                  while(tmp->next)
                         tmp = tmp->next;
+				 if (ft_strcmp(tmp->id, new->id) == 0)
+					 tmp->next = NULL;
+				 else
+				 {
                   tmp->next = new;
                   new->next = NULL;
+				 }
 
         }
 
@@ -130,11 +134,10 @@ t_room     *ft_get_data(char **input)
         head = NULL;
 	while(*input && !has_char(input, '-'))
 	{
-                
              if (has_char(input, ' ') == 0 && num_of_lem == 0)
-                num_of_lem = ft_atoi(*input);
+                	  num_of_lem = ft_atoi(*input);
              else if ((room = read_input(input, num_of_lem)))
-                     ft_add_room(&head, room);
+                      ft_add_room(&head, room);
              else 
                         return (head);
              *input++;
