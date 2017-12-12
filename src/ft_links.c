@@ -13,29 +13,57 @@
 #include "lem_in.h"
 #include "../libft/libft.h"
 
-char    get_link(char **line)
+static int link_len(char **link)
+{
+	int i;
+
+	i = 0;
+	while(link[i])
+		i++;
+	return (i);
+}
+
+char    **get_link(char **line)
 {
     char **link;
 
     link = NULL;
-    while(*line)
+    if ((*line)[0] == '#' && (*line)[1] != '#')
     {
-		ft_putendl(*line++);
+		return (NULL);
+    }
+    link = ft_strsplit(*line, '-');
+    if (link_len(link) != 2 || ft_strcmp(link[0], link[1]) == 0)
+    {
+	while(*link != '\0')
+	{
+		free(*link++);
 	}
-	return NULL;
+	link = NULL;
+    }
+    return (link);
 }
 
-/*t_links     ft_make_links(t_room **room, char **line)
+
+
+int     ft_make_links(t_room **room, char **line)
 {
     char    **link;
     t_room  *room1;
     t_room  *room2;
 
-    room1 = room;
-    room2 = room;
+    room1 = *room;
+    room2 = *room;
 
+    if(link = get_link(line))
+    {
+	while(ft_strcmp(room1->id, link[0]) != 0)
+	{
+		ft_putendl(link[0]);
+	}
+	return (1);
+	
+    }
+    return (0);
 
-
-}*/
-
-
+}

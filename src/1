@@ -55,7 +55,13 @@ int     main()
     //print_list(&new);
      while(*ret)
      {
-	 ft_make_links(ret);
-	 *ret++;
+	input = get_link(ret);
+	int i;
+	while(input[i])
+	{
+	   ft_putendl(input[i]);
+	   i++;
+	}
+	*ret++;
      }
 }

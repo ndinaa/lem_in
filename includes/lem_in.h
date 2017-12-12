@@ -36,6 +36,6 @@ int             is_num(char *str);
 t_room   		*make_room(char **input, int start_end, int num_of_lem);
 t_room          *ft_get_data(char **input);
 t_room          *read_input(char **line, int num_of_lem);
-char            get_link(char **line);
+char            **get_link(char **line);
 
 #endif
