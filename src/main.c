@@ -51,6 +51,7 @@ int     main()
 
     line = ft_print_map();
     ret = ft_strsplit(line, '\n');
-    new = ft_get_data(ret);
-    print_list(&new);
+    //new = ft_get_data(ret);
+    //print_list(&new);
+    get_link(ret);
 }

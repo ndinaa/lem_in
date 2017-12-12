@@ -13,6 +13,7 @@
 NAME	= lem-in
 FILES	= main.c\
 		  ft_get_data.c\
+		  ft_links.c\
 
 
 SRC		= $(addprefix src/, $(FILES))
