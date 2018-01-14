@@ -20,6 +20,11 @@ void	get_ants(t_main *list, char *line)
 }
 
 
+void	create_room(t_main *list, char *line)
+{
+	if (ft_strcmp(line, "##"))
+}
+
 
 void	read_map(t_main *list)
 {
