@@ -5,14 +5,16 @@
 #include <stdlib.h>
 #include "libft/libft.h"
 
-typedef struct s_main{
+typedef struct 	s_main{
+	
 	char	*start;
 	char 	*end;
-	int	error;
+	int 	error;
 	int 	ants;
 
-}		t_main;
+}				t_main;
 
 void	read_map(t_main *list);
-
+void	create_room(t_main **list, char *line, int i);
+void	check_coords(t_main *list, char *x, char *y);
 #endif

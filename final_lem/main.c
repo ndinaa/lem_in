@@ -19,12 +19,10 @@ void	print_list(t_main *list)
 		printf("%d\n", list->ants);
 }
 
-
 int	main()
 {
 	t_main *new;
 
 	new = initialize();
 	read_map(new);
-	print_list(new);
 }
