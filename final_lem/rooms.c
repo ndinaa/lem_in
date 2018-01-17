@@ -1,11 +1,9 @@
-#include "lem_in.h"
-
+include "lem_in.h"
 
 void	add_to_room(t_main **list, char *value, int x, int y)
 {
 	t_room *new;
 
-	(*list)->rooms;
 	if ((*list)->rooms == NULL)
 	{
 		(*list)->rooms = (t_room *)malloc(sizeof(t_room));
@@ -21,6 +19,55 @@ void	add_to_room(t_main **list, char *value, int x, int y)
 	new->next = (*list)->rooms;
 	(*list)->rooms = new;
 	
+}
+
+t_room 		*get_room(t_room *room, char *value)
+{
+	if (room == NULL)
+		return (NULL);
+	while (room != NULL)
+	{
+		if (ft_strcmp(room->value, value) == 0)
+			return room;
+		room = room->next;
+	}
+	return NULL;
+}
+
+void	add_edges(t_room **room1, t_room *room2)
+{
+	t_edges *new;
+
+	if ((*room1)->edges == NULL)
+	{
+		(*room1)->edges = (t_edges *)malloc(sizeof(t_edges));
+		(*room1)->edges->room = room2;
+		(*room1)->edges->next = NULL;
+		return ;
+	}
+	new = (t_edges *)malloc(sizeof(t_edges));
+	new->room = room2;
+	new->next = (*room1)->edges;
+	(*room1)->edges = new;
+
+}
+
+void 	create_edges(t_main *list, char *line)
+{
+	char 	**tab;
+	t_room *room1;
+	t_room *room2;
+	
+	tab = ft_strsplit(line, '-');
+	if (tab[0] && tab[1] && !tab[2])
+	{
+		room1 = get_room (list->rooms, tab[0]);
+		room2 = get_room (list->rooms, tab[1]);
+		if (!room1 || !room2)
+			list->error = 7;
+		add_edges(&room1, room2);
+		add_edges(&room2, room1);
+	}
 }
 
 void	create_room(t_main **list, char *line, int i)

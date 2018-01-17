@@ -10,9 +10,7 @@ t_main		*initialize()
 	new->end = NULL;
 	new->error = 0;
 	new->ants = 0;
-	new->start = NULL;
-	new->end = NULL;
-
+	new->rooms = NULL;
 	return (new);
 }
 

@@ -12,5 +12,7 @@ void		print_error(int i)
 		ft_putendl("Error : A room can not start with a letter '#' or 'L'");
 	else if (i == 5 || i == 6)
 		ft_putendl("Error : invalid room");
+	else if (i == 7)
+		ft_putendl("Error: failed to create edges");
 
 }

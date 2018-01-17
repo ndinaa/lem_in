@@ -4,12 +4,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft/libft.h"
+#include <string.h>
+
+typedef struct 			s_edges
+{
+		void			*room;
+		struct s_edges *next; 
+}						t_edges;
 
 typedef struct  s_room{
 
-	char	*value;
-	int	x;
-	int	y;
+	char		*value;
+	int			x;
+	int			y;
+	t_edges 	*edges;
+
 	struct s_room *next;
 
 }		t_room;
@@ -28,5 +37,6 @@ void	read_map(t_main *list);
 void	create_room(t_main **list, char *line, int i);
 void	check_coords(t_main *list, char *x, char *y);
 void	print_error(int n);
-int	check_char(char *str, int c);
+int		check_char(char *str, int c);
+
 #endif
