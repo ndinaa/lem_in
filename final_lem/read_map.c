@@ -22,23 +22,25 @@ void	get_ants(t_main *list, char *line)
 void	check_coords(t_main *list, char *x, char *y)
 {
 	int i;
-	i = 0;
-	while (x[i++])
+
+	i =  0;
+	while (x[i])
 	{
-		if (!ft_isdigit(x[i]))
+		if (ft_isdigit(x[i]) == 0)
 		{
-			list->error = 5;
-			return ;
+			ft_putendl("yes");
+			i++;
 		}
 	}
 	i = 0;
-	while(y[i++])
+	while (y[i])
 	{
-		if (!ft_isdigit(y[i]))
-			list->error = 6;
-			return ;
+		if (ft_isdigit(y[i]) == 0)
+		{
+			ft_putendl("y");
+			i++;
+		}
 	}
-
 }
 
 void	commands(t_main *list, char  *line)
@@ -50,14 +52,14 @@ void	commands(t_main *list, char  *line)
 		if (list->start != NULL)
 			list->error = 2;
 		get_next_line(0, &temp);
-		create_room(&list, temp, 1);
+		create_room(&list, temp, 0);
 	}
 	else if (ft_strcmp(line, "##end") == 0)
 	{
 		if (list->end != NULL)
 			list->error = 3;
 		get_next_line(0, &temp);
-		create_room(&list, temp, 2);
+		create_room(&list, temp, 1);
 	}
 }
 
@@ -72,7 +74,9 @@ void	read_map(t_main *list)
 		ft_putendl(line);
 		if (line[0] == '#')
 			commands(list, line);
+		else if ((check_char(line, ' ')) > 0 && !list->error)
+			create_room(&list, line, 3);
 	}
 	if (list->error)
-		printf("%d\n", list->error);
+		print_error(list->error);
 }
