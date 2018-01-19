@@ -11,14 +11,23 @@ t_main		*initialize()
 	new->error = 0;
 	new->ants = 0;
 	new->rooms = NULL;
+	new->queue = NULL;
 	return (new);
 }
 
 void	print_room(t_room *room)
 {
+	t_room *temp;
+
 	while (room)
 	{
-		printf("%s", room->value);
+		printf("room %s\n", room->value);
+		while (room->edges)
+		{
+			temp = (t_room *)room->edges->room;
+			printf(" edge %s\n", temp->value);
+			room->edges = room->edges->next;
+		}
 		room = room->next;
 	}
 }
@@ -38,5 +47,6 @@ int	main()
 	new = initialize();
 	read_map(new);
 	print_room(new->rooms);
+	bfs(new);
 	//print_list(new);
 }

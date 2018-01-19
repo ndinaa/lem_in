@@ -41,6 +41,7 @@ void	check_coords(t_main *list, char *x, char *y)
 			i++;
 		}
 	}
+			ft_putendl("yes");
 }
 
 void	commands(t_main *list, char  *line)
@@ -76,6 +77,10 @@ void	read_map(t_main *list)
 			commands(list, line);
 		else if ((check_char(line, ' ')) > 0 && !list->error)
 			create_room(&list, line, 3);
+		else if ((check_char(line, '-')) > 0 && !list->error)
+			create_edges(list, line);
+		else if (ft_strlen(line) > 3)
+			list->error = 8;		
 	}
 	if (list->error)
 		print_error(list->error);

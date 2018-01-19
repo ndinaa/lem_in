@@ -14,5 +14,7 @@ void		print_error(int i)
 		ft_putendl("Error : invalid room");
 	else if (i == 7)
 		ft_putendl("Error: failed to create edges");
+	else if (i == 8)
+		ft_putendl("Error : an error occured while reading the map");
 
 }
