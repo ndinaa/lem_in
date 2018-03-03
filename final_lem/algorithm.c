@@ -1,6 +1,5 @@
 #include "lem_in.h"
 
-
 void		queue(t_main **list, t_room *room)
 {
 	t_queue *new;
@@ -41,42 +40,42 @@ t_room		*dequeue(t_queue **queue, t_room *room)
 	return (room);
 }
 
+void		create_path(t_path **path, t_room *room)
+{
+	if (room == NULL)
+		return;
+	create_path(path, room->parent);
+	build_path(path, room->value);
+}
 
 void		bfs(t_main *list)
 {
 	t_room *current;
-	t_queue *new;
 	t_queue *que;
 	t_room *child;
 
 	current = get_room(list->rooms, list->start);
 	current->searched = 1;
 	queue(&list, current);
-
-	new = list->queue;
-	int i = 1;
+	que = list->queue;
 	while (que != NULL)
 	{
 		current = dequeue(&list->queue, current);
 		if (ft_strcmp(current->value, list->end) == 0)
 		{
-			printf("reached the end");
+			create_path(&(list->path), current);
 			return ;
 		}
 		while (current->edges != NULL)
 		{	
-			child =  (t_room *)current->edges->room;			
+			child =  (t_room *)current->edges->room;
 			if (!child->searched)
 			{
-				
+				child->searched = 1;
+				child->parent = current;
+				queue(&list, child);
 			}
+			current->edges = current->edges->next;
 		}
-		que = que->next;
 	}
-	/*while(new)
-	{		printf(" que %d %s\n", i , new->room->value);
-		i++;
-		new = new->next;
-	}
-	*/
 }

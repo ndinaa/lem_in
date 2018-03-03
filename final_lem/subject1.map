@@ -1,12 +1,11 @@
-3
-2 5 0
-##start
-0 1 2
-##end
-1 9 2
+3#dfdfdfd
+2 5 0#fffgf
+##start#gffgf
+0 1 2#fghfhfh
+##end#fghhghg
+1 9 2#sssfssffsfs
 3 5 4
 0-2
-0-3
+0-3#fdgfgfgf
 2-1
 3-1
-2-3
