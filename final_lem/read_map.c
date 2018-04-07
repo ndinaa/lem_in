@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlibago <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/07 15:10:02 by hlibago           #+#    #+#             */
+/*   Updated: 2018/04/07 15:29:05 by hlibago          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
 void	get_ants(t_main *list, char *line)
@@ -22,7 +34,7 @@ void	get_ants(t_main *list, char *line)
 
 void	check_coords(t_main *list, char *x, char *y)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (x[i] && x[i] != '#')
@@ -47,8 +59,9 @@ void	check_coords(t_main *list, char *x, char *y)
 char	*c(char *line)
 {
 	char	*tmp;
-	int		x = 0;
+	int		x;
 
+	X = 0;
 	tmp = ft_strnew(ft_strlen(line) + 1);
 	while (line[x] && !(line[x] == '#' &&
 				line[x + 1] != '#' && line[x - 1] != '#'))
@@ -58,14 +71,14 @@ char	*c(char *line)
 	}
 	(line) ? ft_putendl(line) : 0;
 	(line) ? free(line) : 0;
-   	tmp[x] = '\0';
-	return (tmp);   
+	tmp[x] = '\0';
+	return (tmp);
 }
 
-void	commands(t_main *list, char  *line)
+void	commands(t_main *list, char *line)
 {
-	char *temp;
-	
+	char	*temp;
+
 	temp = NULL;
 	if (ft_strcmp(line, "##start") == 0)
 	{
@@ -87,13 +100,12 @@ void	commands(t_main *list, char  *line)
 		free(temp);
 }
 
-
 void	read_map(t_main *list)
 {
 	char *line;
 
 	get_ants(list, line);
-	while(get_next_line(0, &line) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
 		line = c(line);
 		if (line[0] == '#')

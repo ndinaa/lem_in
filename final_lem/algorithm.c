@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlibago <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/07 10:37:20 by hlibago           #+#    #+#             */
+/*   Updated: 2018/04/07 15:33:13 by hlibago          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-void		queue(t_main **list, t_room *room)
+void	queue(t_main **list, t_room *room)
 {
-	t_queue *new;
+	t_queue	*new;
 
 	new = (*list)->queue;
-
 	while ((*list)->queue == NULL)
 	{
 		(*list)->queue = (t_queue *)malloc(sizeof(t_queue));
@@ -20,12 +31,10 @@ void		queue(t_main **list, t_room *room)
 	new->next->next = NULL;
 }
 
-
-t_room		*dequeue(t_queue **queue, t_room *room)
+t_room	*dequeue(t_queue **queue, t_room *room)
 {
-
-	t_queue *current;
-	t_queue *new;
+	t_queue	*current;
+	t_queue	*new;
 
 	if (*queue == NULL)
 		return (NULL);
@@ -40,19 +49,19 @@ t_room		*dequeue(t_queue **queue, t_room *room)
 	return (room);
 }
 
-void		create_path(t_path **path, t_room *room)
+void	create_path(t_path **path, t_room *room)
 {
 	if (room == NULL)
-		return;
+		return ;
 	create_path(path, room->parent);
 	build_path(path, room->value);
 }
 
-void		bfs(t_main *list)
+void	bfs(t_main *list)
 {
-	t_room *current;
-	t_queue *que;
-	t_room *child;
+	t_room	*current;
+	t_queue	*que;
+	t_room	*child;
 
 	current = get_room(list->rooms, list->start);
 	current->searched = 1;
@@ -67,8 +76,8 @@ void		bfs(t_main *list)
 			return ;
 		}
 		while (current->edges != NULL)
-		{	
-			child =  (t_room *)current->edges->room;
+		{
+			child = (t_room *)current->edges->room;
 			if (!child->searched)
 			{
 				child->searched = 1;

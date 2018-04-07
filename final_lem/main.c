@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlibago <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/07 14:39:58 by hlibago           #+#    #+#             */
+/*   Updated: 2018/04/07 15:34:41 by hlibago          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem_in.h"
 
-t_main		*initialize()
+t_main	*initialize(void)
 {
-	t_main *new;
+	t_main	*new;
 
 	if (!(new = (t_main *)malloc(sizeof(t_main))))
 		return (NULL);
@@ -20,8 +32,6 @@ void	free_em_up(t_main *main)
 {
 	if (main->path)
 		free_list(main->path);
-	/*if (main->rooms)
-		free_rooms(main->rooms);*/
 	if (main->queue)
 		free_queue(main->queue);
 	if (main->start)
@@ -31,18 +41,19 @@ void	free_em_up(t_main *main)
 	free(main);
 }
 
-int	main()
+int		main(void)
 {
-	t_main *new;
+	t_main	*new;
 
 	new = initialize();
 	read_map(new);
-	if (!new->error && new->start && new->end && ft_strcmp(new->start, new->end) != 0)
+	if (!new->error && new->start && new->end
+			&& ft_strcmp(new->start, new->end) != 0)
 		bfs(new);
 	if (!new->error && new->path)
 		print_ants(new);
 	else
 		ft_putendl("An error was encountered");
-		free_em_up(new);
+	free_em_up(new);
 	return (0);
 }
